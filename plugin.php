@@ -25,10 +25,6 @@
 */
 
 function force_login() {
-    $auth = wp_authenticate_username_password(false, $usr, $pwd);
-    if (!is_wp_error($auth))
-        return;
-
     if ( $GLOBALS['pagenow'] === 'wp-login.php' ) {
         $_GET = array();
         $username = $_POST['log'];
