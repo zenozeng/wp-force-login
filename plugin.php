@@ -4,7 +4,7 @@
   Plugin URI: https://github.com/zenozeng/wp-force-login
   Description: Force Login
   Author: Zeno Zeng
-  Version: 0.0.1
+  Version: 0.0.2
   Author URI: http://zenoes.com/
 
   Copyright (C) 2013 Zeno Zeng
@@ -27,12 +27,34 @@
 function force_login() {
     if ( $GLOBALS['pagenow'] === 'wp-login.php' ) {
         $_GET = array();
-        $username = $_POST['log'];
-        $pwd = $_POST['pwd'];
-        $_POST = array('log' => $username, 'pwd' => $pwd, 'testcookie' => 1);
+        $tmp = array();
+        $tmp['log'] = $_POST['log'];
+        $tmp['pwd'] = $_POST['pwd'];
+        $tmp['wp-submit'] = $_POST['wp-submit'];
+        $tmp['redirect_to'] = $_POST['redirect_to'];
+        $tmp['testcookie'] = $_POST['testcookie'];
+        $_POST = $tmp;
         return;
     }
     
+    // enable ajax login
+    if(isset($_POST['log'])) {
+        $usr = $_POST['log'];
+        $pwd = $_POST['pwd'];
+        $_GET = array();
+        $_POST = array();
+        $creds = array();
+        $creds['user_login'] = $usr;
+        $creds['user_password'] = $pwd;
+        $creds['remember'] = true;
+        $user = wp_signon( $creds, false );
+        if ( is_wp_error($user) ) {
+            die;
+        } else {
+            die('pass');
+        }
+    }
+
     if ( !is_user_logged_in() ) {
         header('Location: '.wp_login_url());
         exit;
