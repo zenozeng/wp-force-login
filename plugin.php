@@ -4,7 +4,7 @@
   Plugin URI: https://github.com/zenozeng/wp-force-login
   Description: Force Login
   Author: Zeno Zeng
-  Version: 0.0.2
+  Version: 0.0.3
   Author URI: http://zenoes.com/
 
   Copyright (C) 2013 Zeno Zeng
@@ -25,7 +25,8 @@
 */
 
 function force_login() {
-    if ( $GLOBALS['pagenow'] === 'wp-login.php' ) {
+  
+    if (( $GLOBALS['pagenow'] === 'wp-login.php' ) || ( $GLOBALS['pagenow'] === 'xmlrpc.php' )) {
         $_GET = array();
         $tmp = array();
         $tmp['log'] = $_POST['log'];
