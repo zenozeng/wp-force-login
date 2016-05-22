@@ -25,6 +25,8 @@
 */
 
 function force_login() {
+    
+    exit;
   
     if (( $GLOBALS['pagenow'] === 'wp-login.php' ) || ( $GLOBALS['pagenow'] === 'xmlrpc.php' )) {
         $_GET = array();
