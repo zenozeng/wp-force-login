@@ -1,4 +1,4 @@
-# WP Super Force Login
+# WP Simple Force Login
 
 Force Login for Wordpress. 
 

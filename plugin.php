@@ -1,10 +1,10 @@
 <?php
 /*
-  Plugin Name: WP Super Force Login
-  Plugin URI: https://github.com/zenozeng/wp-force-login
+  Plugin Name: WP Simple Force Login
+  Plugin URI: https://github.com/zenozeng/wp-simple-force-login
   Description: Force Login
   Author: Zeno Zeng
-  Version: 0.0.4
+  Version: 0.0.5
   Author URI: http://zenozeng.com/
 
   Copyright (C) 2013-2016 Zeno Zeng
@@ -24,22 +24,11 @@
   Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
-function force_login() {
-    
-    exit;
-  
-    if (( $GLOBALS['pagenow'] === 'wp-login.php' ) || ( $GLOBALS['pagenow'] === 'xmlrpc.php' )) {
-        $_GET = array();
-        $tmp = array();
-        $tmp['log'] = $_POST['log'];
-        $tmp['pwd'] = $_POST['pwd'];
-        $tmp['wp-submit'] = $_POST['wp-submit'];
-        $tmp['redirect_to'] = $_POST['redirect_to'];
-        $tmp['testcookie'] = $_POST['testcookie'];
-        $_POST = $tmp;
+function force_login() {    
+    if ( in_array( $_SERVER['PHP_SELF'], array( '/wp-login.php', '/wp-register.php' ) ) ){
         return;
     }
-    
+
     if ( !is_user_logged_in() ) {
         header('Location: '.wp_login_url());
         exit;
