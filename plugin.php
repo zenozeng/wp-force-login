@@ -7,7 +7,7 @@
   Version: 0.0.4
   Author URI: http://zenozeng.com/
 
-  Copyright (C) 2013 Zeno Zeng
+  Copyright (C) 2013-2016 Zeno Zeng
 
   This program is free software; you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
